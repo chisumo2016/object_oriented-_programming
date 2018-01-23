@@ -1,7 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bundalla
- * Date: 1/23/2018
- * Time: 6:05 PM
- */
+
+//Define the abstract class Bank Account
+
+ abstract  class BankAccount{
+     //Define the properties
+     protected  $balance =  0;
+     public $APR ;
+     public $sortCode;
+     public $FirstName ;
+     public $LastName;
+     public $Audit = [];
+     protected  $locked =false;
+
+     //Define the Method of A
+
+ }
+
