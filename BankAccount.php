@@ -10,9 +10,30 @@
      public $FirstName ;
      public $LastName;
      public $Audit = [];
-     protected  $locked =false;
+     protected  $Locked =false;
 
-     //Define the Method of A
+     //Define the Method  to Withdara
+
+     public function  Widthdraw($amount)
+     {
+         //define the date
+         $transDate = new DateTime();
+         if($this->Locked ===  false){
+             $this->Balance -= $amount;
+
+             //Insert
+             array_push($this->Audit, ["WITHDRAW ACCEPTED ", $amount, $this->Balance, $transDate->format('c')]);  //[] sub array
+         }else{
+
+             array_push($this->Audit, ["WITHDRAW DENIED ", $amount, $this->Balance, $transDate->format('c')]);  //[] sub array
+
+         }
+     }
+
+
+
+
+
 
  }
 
