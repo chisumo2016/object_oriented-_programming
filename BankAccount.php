@@ -54,7 +54,18 @@
          $transDate = new DateTime();
          array_push($this->Audit, ["ACCOUNT  LOCKED ",  $transDate->format('c')]);  //[] sub array
 
-         
+
+     }
+
+     //Lock Account
+     public function  UnLock()
+     {
+         $this->Locked = false;
+
+         $unlocktransDate = new DateTime();
+         array_push($this->Audit, ["ACCOUNT  UNLOCKED ",    $unlocktransDate->format('c')]);  //[] sub array
+
+
      }
 
  }
