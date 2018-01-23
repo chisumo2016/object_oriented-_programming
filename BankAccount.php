@@ -45,6 +45,17 @@
 
          }
      }
-     
+
+     //Lock Account
+     public function  Lock()
+     {
+         $this->Locked = true;
+
+         $transDate = new DateTime();
+         array_push($this->Audit, ["ACCOUNT  LOCKED ",  $transDate->format('c')]);  //[] sub array
+
+         
+     }
+
  }
 
