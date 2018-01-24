@@ -44,4 +44,22 @@ class ISA extends BankAccount {
         array_push($this->Audit,array("WITHDRAW PENALTY", 10, $this->Balance,$transDate->format('c')));
 
     }
+
+}
+
+class  Savings extends  BankAccount{
+    public $PocketBook = [];
+    public $DepositBook = [];
+
+    //Methods
+
+    public function  OrderNewBook(){
+        $orderTime = new DateTime();
+        array_push($this->PocketBook ,array("Ordered new pocket book on :" . $orderTime->format('c')));
+    }
+
+    public function  OrderNewDepositBook(){
+        $orderTime = new DateTime();
+        array_push($this->PocketBook ,array("Ordered new deposit book on :" . $orderTime->format('c')));
+    }
 }
