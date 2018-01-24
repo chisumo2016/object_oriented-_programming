@@ -13,7 +13,7 @@
      protected  $Locked =false;
 
      /*Define the Method  to Withdaraw*/
-     public function  Widthdraw($amount)
+     public function  WidthDraw($amount)
      {
          //define the date
          $transDate = new DateTime();
