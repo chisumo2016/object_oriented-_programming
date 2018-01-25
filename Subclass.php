@@ -56,7 +56,7 @@ interface  AccountPlus{
      public function AddedBonus();
 }
 
-interface  Savers{
+interface  Savers{  // Must be public
     public function OrderNewBook();
     public function OrderNewDepositBook();
 
