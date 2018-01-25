@@ -52,7 +52,6 @@ trait   SavingPlus{
 
 }
 
-
 interface  AccountPlus{
      public function AddedBonus();
 }
