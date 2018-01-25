@@ -63,3 +63,30 @@ class  Savings extends  BankAccount{
         array_push($this->PocketBook ,array("Ordered new deposit book on :" . $orderTime->format('c')));
     }
 }
+
+class Debit extends  BankAccount{
+    //Properties
+    private  $CardNumber;
+    private  $SecurityCode;
+    private $PinNumber;
+
+    //Methods
+    public function  Validate()
+    {
+        $valDate = new DateTime();
+        $this->CardNumber = rand(1000,9999) ."-". rand(1000, 9999) ."-". rand(1000, 9999) ."-". rand(1000, 9999) ;
+        $this->SecurityCode =rand(100, 999) ;
+        array_push($this->Audit, array("VALIDATE CARD ", $valDate->format('c'), $this->CardNumber, $this->SecurityCode, $this->PinNumber));
+
+    }
+
+    public function  ChangePin($newPin){
+        $pinChange = new DateTime(); // security and fraud purpose
+        $this->PinNumber = $newPin;  // You can add validate pin number
+
+        array_push($this->Audit,array("PIN CHANGED",$pinChange->format('c'), $this->PinNumber));
+    }
+}
+
+
+
