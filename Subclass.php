@@ -3,15 +3,19 @@ require ("BankAccount.php");
 
 class ISA extends BankAccount {
     //public $TimePeriod = 28;
-    private $TimePeriod = 28;
+    //private $TimePeriod = 28;
+    private $TimePeriod ;  // Bse of constructor
     public $AdditionalService;
 
     //Constructor
 
-    public function __construct($time, $service)  // can receive vakue and receive arg
+    public function __construct($time, $service, $apr , $sort_code ,$first_name, $last_name, $bal=0, $lock= false)  // can receive vakue and receive arg
     {
         $this->TimePeriod = $time;
         $this->AdditionalService  = $service;
+
+        //Calling Parent class
+        parent::__construct($apr , $sort_code ,$first_name,$last_name, $bal, $lock);
     }
 
     //Method
@@ -43,7 +47,20 @@ class ISA extends BankAccount {
                 array_push($this->Audit,array("WITHDRAW DENIED", $amount, $this->Balance,$transDate->format('c')));
             }
         }
+
+        echo parent::$stat;
     }
+
+
+    public function  Penalty()
+    {
+
+        $transDate = new DateTime();
+        $this->Balance -= 10;
+        array_push($this->Audit,array("WITHDRAW PENALTY", 10, $this->Balance,$transDate->format('c')));
+
+    }
+
 
 }
 
@@ -79,10 +96,13 @@ class  Savings extends  BankAccount implements  AccountPlus , Savers {
 
     // Constructor
 
-    public  function  __construct($free , $package)
+    public  function  __construct($free , $package, $apr , $sort_code ,$first_name, $last_name, $bal=0, $lock= false)
     {
         $this->MonthlyFee = $free;
         $this->Package = $package;
+
+        //Calling Parent class
+        parent::__construct($apr , $sort_code ,$first_name,$last_name, $bal, $lock);
     }
 
     //Methods
@@ -111,12 +131,15 @@ class Debit extends  BankAccount   implements AccountPlus
 
     //Constructor
 
-    public function  __construct($fee, $package, $pin)
+    public function  __construct($fee, $package, $pin, $apr , $sort_code ,$first_name, $last_name, $bal=0, $lock= false)
     {
         $this->MonthlyFee = $fee;
         $this->Package = $package;
         $this->PinNumber = $pin;
         $this->Validate();
+
+        //Calling Parent class
+        parent::__construct($apr , $sort_code ,$first_name,$last_name, $bal, $lock);
 
     }
 
@@ -138,15 +161,6 @@ class Debit extends  BankAccount   implements AccountPlus
         array_push($this->Audit, array("PIN CHANGED", $pinChange->format('c'), $this->PinNumber));
     }
 
-
-    public function  Penalty()
-    {
-
-        $transDate = new DateTime();
-        $this->Balance -= 10;
-        array_push($this->Audit,array("WITHDRAW PENALTY", 10, $this->Balance,$transDate->format('c')));
-
-    }
 
 
 

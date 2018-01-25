@@ -3,14 +3,42 @@
 //Define the abstract class Bank Account
 
  abstract  class BankAccount{
+
+     // Define Constnt
+
+     const  INFO ="Constant in BankAccount class <br><br/>";  //Property never change , u must give a value .must be capital , memory and rerference once
+     static  public $stat ="static property string  <br><br/>";  // Variable ,value can change
+
      //Define the properties
-     protected  $Balance =  0;
+     //protected  $Balance =  0;
+     protected  $Balance ;
      public $APR ;
      public $sortCode;
      public $FirstName ;
      public $LastName;
      public $Audit = [];
-     protected  $Locked =false;
+     protected  $Locked ; // use on cons
+     //protected  $Locked =false;
+
+     //Constructor
+
+     public function  __construct($apr , $sort_code ,$first_name,$last_name, $bal=0, $lock= false)
+     {
+         $this->Balance   =  $bal;
+         $this->APR       =  $apr;
+         $this->sortCode  =  $sort_code;
+         $this->FirstName =  $first_name;
+         $this->LastName  =  $last_name;
+         $this->Locked    =  $lock;
+
+     }
+
+
+     //Static Method
+
+     static  public  function stat(){ // We can reference this in memory once, cant override ,
+         echo "This is the method static string" . self::INFO .self::$stat;
+     }
 
      /*Define the Method  to Withdaraw*/
      public function  WidthDraw($amount)
@@ -69,4 +97,9 @@
      }
 
  }
+
+ // Fetching the some pience of information  in the memory
+ /*echo BankAccount::INFO;
+ echo BankAccount::$stat;
+ echo BankAccount::stat();*/
 
