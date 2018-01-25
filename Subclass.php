@@ -48,6 +48,7 @@ class ISA extends BankAccount {
 }
 
 class  Savings extends  BankAccount{
+    use SavingPlus;
     public $PocketBook = [];
     public $DepositBook = [];
 
@@ -65,6 +66,9 @@ class  Savings extends  BankAccount{
 }
 
 class Debit extends  BankAccount{
+
+    use SavingPlus;
+
     //Properties
     private  $CardNumber;
     private  $SecurityCode;
@@ -86,6 +90,21 @@ class Debit extends  BankAccount{
 
         array_push($this->Audit,array("PIN CHANGED",$pinChange->format('c'), $this->PinNumber));
     }
+}
+
+
+trait   SavingPlus{
+    private $MonthlyFee =20;
+
+    public $Package = "holiday insurance";
+
+    //Methods
+    public function  AddedBonus()
+    {
+        echo "Hello" . $this->FirstName. " " .$this->LastName ." for &pound;" .$this->MonthlyFee ."a month you get " .$this->Package;
+    }
+
+
 }
 
 
