@@ -2,8 +2,17 @@
 require ("BankAccount.php");
 
 class ISA extends BankAccount {
-    public $TimePeriod = 28;
+    //public $TimePeriod = 28;
+    private $TimePeriod = 28;
     public $AdditionalService;
+
+    //Constructor
+
+    public function __construct($time, $service)  // can receive vakue and receive arg
+    {
+        $this->TimePeriod = $time;
+        $this->AdditionalService  = $service;
+    }
 
     //Method
 
@@ -68,6 +77,14 @@ class  Savings extends  BankAccount implements  AccountPlus , Savers {
     public $PocketBook = [];
     public $DepositBook = [];
 
+    // Constructor
+
+    public  function  __construct($free , $package)
+    {
+        $this->MonthlyFee = $free;
+        $this->Package = $package;
+    }
+
     //Methods
 
     public function  OrderNewBook(){
@@ -92,8 +109,19 @@ class Debit extends  BankAccount   implements AccountPlus
     private $SecurityCode;
     private $PinNumber;
 
+    //Constructor
+
+    public function  __construct($fee, $package, $pin)
+    {
+        $this->MonthlyFee = $fee;
+        $this->Package = $package;
+        $this->PinNumber = $pin;
+        $this->Validate();
+
+    }
+
     //Methods
-    public function Validate()
+   private function Validate()    ///public function Validate()
     {
         $valDate = new DateTime();
         $this->CardNumber = rand(1000, 9999) . "-" . rand(1000, 9999) . "-" . rand(1000, 9999) . "-" . rand(1000, 9999);
