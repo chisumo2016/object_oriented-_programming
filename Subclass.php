@@ -36,18 +36,35 @@ class ISA extends BankAccount {
         }
     }
 
-    public function  Penalty()
+}
+
+trait   SavingPlus{
+    private $MonthlyFee =20;
+
+    public $Package = "holiday insurance";
+
+    //Methods
+    public function  AddedBonus()
     {
-
-        $transDate = new DateTime();
-        $this->Balance -= 10;
-        array_push($this->Audit,array("WITHDRAW PENALTY", 10, $this->Balance,$transDate->format('c')));
-
+        echo "Hello" . $this->FirstName. " " .$this->LastName ." for &pound;" .$this->MonthlyFee ."a month you get " .$this->Package;
     }
+
 
 }
 
-class  Savings extends  BankAccount{
+
+interface  AccountPlus{
+     public function AddedBonus();
+}
+
+interface  Savers{
+    public function OrderNewBook();
+    public function OrderNewDepositBook();
+
+}
+
+
+class  Savings extends  BankAccount implements  AccountPlus , Savers {
     use SavingPlus;
     public $PocketBook = [];
     public $DepositBook = [];
@@ -65,47 +82,57 @@ class  Savings extends  BankAccount{
     }
 }
 
-class Debit extends  BankAccount{
+
+class Debit extends  BankAccount   implements AccountPlus
+{
 
     use SavingPlus;
 
     //Properties
-    private  $CardNumber;
-    private  $SecurityCode;
+    private $CardNumber;
+    private $SecurityCode;
     private $PinNumber;
 
     //Methods
-    public function  Validate()
+    public function Validate()
     {
         $valDate = new DateTime();
-        $this->CardNumber = rand(1000,9999) ."-". rand(1000, 9999) ."-". rand(1000, 9999) ."-". rand(1000, 9999) ;
-        $this->SecurityCode =rand(100, 999) ;
+        $this->CardNumber = rand(1000, 9999) . "-" . rand(1000, 9999) . "-" . rand(1000, 9999) . "-" . rand(1000, 9999);
+        $this->SecurityCode = rand(100, 999);
         array_push($this->Audit, array("VALIDATE CARD ", $valDate->format('c'), $this->CardNumber, $this->SecurityCode, $this->PinNumber));
 
     }
 
-    public function  ChangePin($newPin){
+    public function ChangePin($newPin)
+    {
         $pinChange = new DateTime(); // security and fraud purpose
         $this->PinNumber = $newPin;  // You can add validate pin number
 
-        array_push($this->Audit,array("PIN CHANGED",$pinChange->format('c'), $this->PinNumber));
+        array_push($this->Audit, array("PIN CHANGED", $pinChange->format('c'), $this->PinNumber));
     }
-}
 
 
-trait   SavingPlus{
-    private $MonthlyFee =20;
-
-    public $Package = "holiday insurance";
-
-    //Methods
-    public function  AddedBonus()
+    public function  Penalty()
     {
-        echo "Hello" . $this->FirstName. " " .$this->LastName ." for &pound;" .$this->MonthlyFee ."a month you get " .$this->Package;
+
+        $transDate = new DateTime();
+        $this->Balance -= 10;
+        array_push($this->Audit,array("WITHDRAW PENALTY", 10, $this->Balance,$transDate->format('c')));
+
     }
 
 
+
 }
+
+
+
+
+
+
+
+
+
 
 
 
